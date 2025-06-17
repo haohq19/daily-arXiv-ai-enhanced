@@ -14,11 +14,16 @@ class DailyArxivPipeline:
     def __init__(self):
         self.page_size = 100
         self.client = arxiv.Client(self.page_size)
-        keywords = os.environ.get("KEYWORDS", "cs.CV")
+        keywords = os.environ.get("KEYWORDS", "")
+        print(keywords)
         keywords = keywords.split(",")
+        print(keywords)
         keywords = set(map(str.strip, keywords))   # keywords to filter papers, e.g.. {"event", "dvs", "neuromorphic"}
+        print(keywords)
         self.keyword_pattern = re.compile('|'.join(map(re.escape, keywords)), re.IGNORECASE)
-
+        print(bool(self.keyword_pattern.search('event-based cameras')))  # Example usage to ensure the pattern is compiled correctly
+        print(bool(self.keyword_pattern.search('neuromorphic computing')))  # Example usage to ensure the pattern is compiled correctly
+        print(bool(self.keyword_pattern.search('machine learning')))
     def check_keywords(self, text: str) -> bool:
         if not text:
             return False

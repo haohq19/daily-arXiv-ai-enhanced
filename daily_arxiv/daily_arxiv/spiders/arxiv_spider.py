@@ -64,3 +64,4 @@ class ArxivSpider(scrapy.Spider):
                     "id": arxiv_id,
                     "categories": [],
                 }
+            break
