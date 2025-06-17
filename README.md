@@ -31,7 +31,7 @@ You can modify it in `.github/workflows/run.yml`
 - [ ] Update instructions for fork users about how to use github pages.
 
 # Content
-
+[2025-06-17](data/2025-06-17.md)
 
 # Related tools
 - ICML, ICLR, NeurIPS list: https://dw-dengwei.github.io/OpenReview-paper-list/index.html
