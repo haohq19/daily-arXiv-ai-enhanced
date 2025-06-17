@@ -15,15 +15,10 @@ class DailyArxivPipeline:
         self.page_size = 100
         self.client = arxiv.Client(self.page_size)
         keywords = os.environ.get("KEYWORDS", "")
-        print(keywords)
         keywords = keywords.split(",")
-        print(keywords)
         keywords = set(map(str.strip, keywords))   # keywords to filter papers, e.g.. {"event", "dvs", "neuromorphic"}
-        print(keywords)
         self.keyword_pattern = re.compile('|'.join(map(re.escape, keywords)), re.IGNORECASE)
-        print(bool(self.keyword_pattern.search('event-based cameras')))  # Example usage to ensure the pattern is compiled correctly
-        print(bool(self.keyword_pattern.search('neuromorphic computing')))  # Example usage to ensure the pattern is compiled correctly
-        print(bool(self.keyword_pattern.search('machine learning')))
+
     def check_keywords(self, text: str) -> bool:
         if not text:
             return False
@@ -41,11 +36,10 @@ class DailyArxivPipeline:
         item["categories"] = paper.categories
         item["comment"] = paper.comment
         item["summary"] = paper.summary
-        # print(item)
 
         if (not self.check_keywords(item["summary"])) and (not self.check_keywords(item["title"])):
             spider.logger.debug(f"Skipped paper {item['id']} - {item['title']}")
             raise DropItem(f"No keywords matched")
-
-        spider.logger.info(f"Processed paper {item['id']} - {item['title']}")
-        return item
+        else:
+            spider.logger.info(f"Processed paper {item['id']} - {item['title']}")
+            return item
