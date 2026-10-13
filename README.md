@@ -23,6 +23,8 @@ You can modify it in `.github/workflows/run.yml`
 
 
 # Content
+[2026-10-13](data/2026-10-13.md)
+
 [2026-10-11](data/2026-10-11.md)
 
 [2026-10-08](data/2026-10-08.md)
